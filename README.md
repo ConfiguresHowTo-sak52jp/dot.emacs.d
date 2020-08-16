@@ -31,4 +31,15 @@ pip install jedi
 ```
 companyとの連携はelpy内部で隠蔽されているようなので、明示的に`company-jedi`をインストールする必要はない。
 ## 文法チェック機能
-TODO
+### フロントエンド
+`flycheck`を使用している。インストールソースはmelpa-stable。
+### C/C++言語用エンジン
+`flycheck-irony`を使用している。インストールソースはmelpa-stable。  
+実体は`irony-mode`であり、前述した`company-irony`インストール時にdependencyとしてインストールされている。
+
+### Python用エンジン
+上述した通り、`eply`で統括管理しており、flycheckのバックエンドとして動作するモジュールは、`flake8`及び`autopep8`である。
+これらのモジュールはpython moduleであるため、下記の通り外部環境としてインストールしておく。
+```
+pip install flake8 autopep8
+```
