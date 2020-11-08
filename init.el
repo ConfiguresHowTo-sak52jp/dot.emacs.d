@@ -1,6 +1,7 @@
 ;;---- requireの代替としてuse-packageを使う ---
 (require 'use-package)
 (require 'bind-key)
+(setq use-package-verbose t)
 
 ;;---- marmaladeをロードする時に発生する認証エラーを抑制するため ---
 (use-package gnutls
@@ -62,11 +63,13 @@
 
 
 ;;--------- make-modeの設定 ----------
-(require 'make-mode)
-(setq auto-mode-alist 
-      (append '(("Make\\..*$" . makefile-gmake-mode) ;; Make.*
-                ) auto-mode-alist))
-
+(use-package make-mode
+  :config
+;;  (require 'make-mode)
+  (setq auto-mode-alist 
+        (append '(("Make\\..*$" . makefile-gmake-mode) ;; Make.*
+                  ) auto-mode-alist))
+  )
 
 ;;---------- 列番号も表示する -------------------------
 (column-number-mode t)
@@ -117,10 +120,13 @@
 (add-hook 'perl-mode-hook 'my-perl-mode-hook)
 
 ;;; mozc
-(require 'mozc)                                 ; mozcの読み込み
-(set-language-environment "Japanese")           ; 言語環境を"japanese"に
-(setq default-input-method "japanese-mozc")     ; IMEをjapanes-mozcに
-(prefer-coding-system 'utf-8)                   ; デフォルトの文字コードをUTF-8に
+(use-package mozc
+  :config
+  ;;(require 'mozc)                                 ; mozcの読み込み
+  (set-language-environment "Japanese")           ; 言語環境を"japanese"に
+  (setq default-input-method "japanese-mozc")     ; IMEをjapanes-mozcに
+  (prefer-coding-system 'utf-8)                   ; デフォルトの文字コードをUTF-8に
+  )
 
 (provide 'init)
 ;;; init.el ends here
